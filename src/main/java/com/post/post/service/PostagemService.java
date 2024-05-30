@@ -35,5 +35,9 @@ public class PostagemService {
         return postagemRepository.save(postagem);
     }
 
+    public  void delete(Long id) {
+        postagemRepository.deleteById(id);
+    }
+
 
 }

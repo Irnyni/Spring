@@ -8,6 +8,7 @@ import com.post.post.entity.Postagem;
 import com.post.post.service.PostagemService;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,7 +30,7 @@ public class PostagemController {
        return postagemService.listar();
     }
 
-    @GetMapping("/{id}") // Corrigido para obter uma postagem por ID
+    @GetMapping("/{id}") 
     public ResponseEntity<Postagem> getPostagemById(@PathVariable Long id) {
         Optional<Postagem> postagemOptional = postagemService.obterPostagemPorId(id);
         if (postagemOptional.isPresent()) {
@@ -42,6 +43,12 @@ public class PostagemController {
     @PostMapping
     public Postagem criarPostagem(@RequestBody Postagem postagem) {
         return postagemService.atualizarPostagem(postagem);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void>  delete(@PathVariable Long id){
+        postagemService.delete(id);
+        return ResponseEntity.noContent().build();
+
     }
 
     @PutMapping("/{id}")
