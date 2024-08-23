@@ -1,9 +1,13 @@
 package com.post.post.entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,6 +18,8 @@ public class Postagem {
     private String descricao;
     private String post;
     private String imagem;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comentario> comentarios;
     public Long getId() {
         return id;
     }
